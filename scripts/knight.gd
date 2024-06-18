@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const GRAVITY = 20
+const GRAVITY = 15
 
 func _physics_process(delta):
 	velocity.y += GRAVITY
