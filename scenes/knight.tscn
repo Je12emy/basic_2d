@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bumk4mqrwwfnm"]
+[gd_scene load_steps=45 format=3 uid="uid://bumk4mqrwwfnm"]
 
 [ext_resource type="Texture2D" uid="uid://b75f01dcauk1l" path="res://sprites/knight/attack.png" id="1_8vc65"]
 [ext_resource type="Script" path="res://scripts/knight.gd" id="1_thp5o"]
@@ -253,10 +253,9 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eudyb"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kostb"]
-size = Vector2(32, 20)
-
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("1_thp5o")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -266,12 +265,6 @@ animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_eudyb")
-
-[node name="Hitbox" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(26, 1)
-shape = SubResource("RectangleShape2D_kostb")
-debug_color = Color(0.922993, 0.234358, 0.382282, 0.42)
 
 [node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_icu60")

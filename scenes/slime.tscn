@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c44koaaloc2ut"]
+[gd_scene load_steps=23 format=3 uid="uid://c44koaaloc2ut"]
 
 [ext_resource type="Script" path="res://Slime.gd" id="1_ubqnd"]
 [ext_resource type="Texture2D" uid="uid://crxyu8fha7p5q" path="res://sprites/slime_green.png" id="2_6kcd1"]
@@ -6,9 +6,13 @@
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_7jqi3"]
 [ext_resource type="Script" path="res://states/mob/MobIdle.gd" id="5_15rqv"]
 [ext_resource type="Script" path="res://states/mob/MobRoam.gd" id="6_iflvr"]
+[ext_resource type="Script" path="res://states/mob/MobAggro.gd" id="7_qb7le"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ke8xo"]
 radius = 9.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u0g22"]
+size = Vector2(134, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vqcsp"]
 atlas = ExtResource("2_6kcd1")
@@ -113,6 +117,8 @@ animations = [{
 }]
 
 [node name="Slime" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_ubqnd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -120,11 +126,17 @@ position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_ke8xo")
 debug_color = Color(1.92523e-07, 0.612891, 0.618609, 0.42)
 
+[node name="AggroZone" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroZone"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_u0g22")
+debug_color = Color(0.61984, 0.354367, 1, 0.42)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_b13te")
 animation = &"walk"
-
-[node name="Area2D" type="Area2D" parent="."]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_7jqi3")
@@ -142,3 +154,10 @@ animated_sprite = NodePath("../../AnimatedSprite2D")
 script = ExtResource("6_iflvr")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 mob = NodePath("../..")
+
+[node name="Aggro" type="Node" parent="StateMachine" node_paths=PackedStringArray("mob")]
+script = ExtResource("7_qb7le")
+mob = NodePath("../..")
+
+[connection signal="body_entered" from="AggroZone" to="StateMachine/Roam" method="_on_aggro_zone_body_entered"]
+[connection signal="body_exited" from="AggroZone" to="StateMachine/Aggro" method="_on_aggro_zone_body_exited"]
