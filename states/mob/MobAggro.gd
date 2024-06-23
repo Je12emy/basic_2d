@@ -17,8 +17,8 @@ func Physics_Update(_delta: float):
 			mob.velocity.x = -chase_speed
 	mob.move_and_slide()
 
-func _on_aggro_zone_body_exited(body):
+func _on_aggro_zone_body_exited(_body):
 	Transitioned.emit(self, "idle")
 
-func _on_slime_hurt(damage):
+func _on_slime_hurt(_damage):
 	Transitioned.emit(self, "hurt")

@@ -5,8 +5,9 @@ class_name MobHurt
 @export var mob : Mob
 
 func Enter():
-	print("HURT")
+	mob.velocity.x = 400
+	mob.velocity.y = -300
+	mob.move_and_slide()
 
 func Update(_delta: float):
-	print("AGGRO")
 	Transitioned.emit(self, "Aggro")

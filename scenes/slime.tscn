@@ -160,8 +160,9 @@ mob = NodePath("../..")
 script = ExtResource("7_qb7le")
 mob = NodePath("../..")
 
-[node name="Hurt" type="Node" parent="StateMachine"]
+[node name="Hurt" type="Node" parent="StateMachine" node_paths=PackedStringArray("mob")]
 script = ExtResource("8_jbin0")
+mob = NodePath("../..")
 
 [connection signal="hurt" from="." to="StateMachine/Aggro" method="_on_slime_hurt"]
 [connection signal="body_entered" from="AggroZone" to="StateMachine/Roam" method="_on_aggro_zone_body_entered"]
