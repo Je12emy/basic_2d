@@ -7,6 +7,6 @@ class_name Player
 @export var HEALTH : int = 100
 @export var ATTACK_DAMAGE : int = 50
 
-func _physics_process(delta):
+func _physics_process(_delta : float):
 	velocity.y += GRAVITY
 	move_and_slide()

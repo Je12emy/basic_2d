@@ -274,7 +274,6 @@ collision_mask = 4
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
-position = Vector2(26.5, 1)
 shape = SubResource("RectangleShape2D_d7upg")
 debug_color = Color(0.997314, 0, 0.168662, 0.42)
 
@@ -286,10 +285,11 @@ initial_state = NodePath("Idle")
 script = ExtResource("7_8xwhn")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 
-[node name="Walk" type="Node" parent="State Machine" node_paths=PackedStringArray("animated_sprite", "player")]
+[node name="Walk" type="Node" parent="State Machine" node_paths=PackedStringArray("animated_sprite", "player", "attack_box")]
 script = ExtResource("8_bwwnw")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 player = NodePath("../..")
+attack_box = NodePath("../../AttackBox")
 
 [node name="Attack" type="Node" parent="State Machine" node_paths=PackedStringArray("animated_sprite", "player", "attack_box")]
 script = ExtResource("9_wlft1")
