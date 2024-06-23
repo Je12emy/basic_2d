@@ -3,8 +3,8 @@ extends State
 class_name MobAggro
 
 var player : CharacterBody2D
-@export var mob : CharacterBody2D
-@export var chase_speed = 70
+@export var mob : Mob
+@export var chase_speed = 60
 
 func Enter():
 	player = get_tree().get_first_node_in_group("Player")

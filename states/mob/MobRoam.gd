@@ -3,12 +3,11 @@ extends State
 class_name MobRoam
 
 @export var animated_sprite : AnimatedSprite2D
-@export var mob : CharacterBody2D
+@export var mob : Mob
 @export var aggro_zone : Area2D
 
 # This vector represents the direction where the mob moves
 var direction = Vector2.RIGHT
-@export var walk_speed = -50
 
 func Enter():
 	animated_sprite.play("walk")
@@ -16,7 +15,7 @@ func Enter():
 func Physics_Update(_delta: float):
 	if colides_with_something():
 		direction.x *= -1
-	mob.velocity.x = walk_speed * direction.x
+	mob.velocity.x = mob.SPEED * direction.x
 	mob.move_and_slide()
 	
 func colides_with_something() -> bool:

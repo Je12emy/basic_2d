@@ -3,9 +3,9 @@ extends State
 class_name PlayerJump
 
 @export var animated_sprite : AnimatedSprite2D
+@export var player : Player
 
 # Math taken from here: https://www.youtube.com/watch?v=IOe1aGY6hXA
-@export var move_speed = 100.0
 @export var jump_height : float
 @export var jump_time_to_peak : float
 @export var jump_time_to_descent : float
@@ -14,7 +14,7 @@ class_name PlayerJump
 @onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 
-var player : CharacterBody2D
+
 
 func Enter():
 	player = get_tree().get_first_node_in_group("Player")
@@ -23,7 +23,7 @@ func Enter():
 	
 func Physics_Update(delta):
 	player.velocity.y += get_gravity() * delta
-	player.velocity.x = get_input_velocity() * move_speed
+	player.velocity.x = get_input_velocity() * player.SPEED
 
 	# Once the player lands, we can transition to whichever state we want
 	var landed = player.move_and_slide()
