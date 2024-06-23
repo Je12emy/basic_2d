@@ -3,6 +3,7 @@ extends State
 class_name PlayerAttack
 @export var animated_sprite : AnimatedSprite2D
 @export var player : Player
+@export var attack_box : Area2D
 
 func Enter():
 	animated_sprite.play("attack")
@@ -12,5 +13,16 @@ func Enter():
 	
 func Update(_delta: float):
 	if animated_sprite.is_playing():
+		if animated_sprite.frame >= 4 and animated_sprite.frame <= 5:
+			attack_box.monitoring = true
+			attack_box.visible = true
+		else:
+			attack_box.monitoring = false
+			attack_box.visible = false
 		return
 	Transitioned.emit(self, "idle")	
+
+
+func _on_attack_box_body_entered(body):
+	if body is Mob:
+		body.take_damage(player.ATTACK_DAMAGE)

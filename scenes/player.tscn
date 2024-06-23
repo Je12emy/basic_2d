@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://bumk4mqrwwfnm"]
+[gd_scene load_steps=46 format=3 uid="uid://bumk4mqrwwfnm"]
 
 [ext_resource type="Texture2D" uid="uid://b75f01dcauk1l" path="res://sprites/knight/attack.png" id="1_8vc65"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_sukmu"]
@@ -253,18 +253,30 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eudyb"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7upg"]
+size = Vector2(31, 20)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_sukmu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_uvato")
 animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_eudyb")
+
+[node name="AttackBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(26.5, 1)
+shape = SubResource("RectangleShape2D_d7upg")
+debug_color = Color(0.997314, 0, 0.168662, 0.42)
 
 [node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_icu60")
@@ -279,10 +291,11 @@ script = ExtResource("8_bwwnw")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 player = NodePath("../..")
 
-[node name="Attack" type="Node" parent="State Machine" node_paths=PackedStringArray("animated_sprite", "player")]
+[node name="Attack" type="Node" parent="State Machine" node_paths=PackedStringArray("animated_sprite", "player", "attack_box")]
 script = ExtResource("9_wlft1")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 player = NodePath("../..")
+attack_box = NodePath("../../AttackBox")
 
 [node name="Jump" type="Node" parent="State Machine" node_paths=PackedStringArray("animated_sprite", "player")]
 script = ExtResource("11_vschr")
@@ -295,3 +308,5 @@ jump_time_to_descent = 0.4
 [node name="Falling" type="Node" parent="State Machine" node_paths=PackedStringArray("player")]
 script = ExtResource("12_tyaf8")
 player = NodePath("../..")
+
+[connection signal="body_entered" from="AttackBox" to="State Machine/Attack" method="_on_attack_box_body_entered"]

@@ -19,3 +19,6 @@ func Physics_Update(_delta: float):
 
 func _on_aggro_zone_body_exited(body):
 	Transitioned.emit(self, "idle")
+
+func _on_slime_hurt(damage):
+	Transitioned.emit(self, "hurt")
