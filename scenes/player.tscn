@@ -254,7 +254,7 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eudyb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7upg"]
-size = Vector2(31, 20)
+size = Vector2(45.5, 26)
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 7
@@ -274,6 +274,7 @@ collision_mask = 4
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(0.25, 3)
 shape = SubResource("RectangleShape2D_d7upg")
 debug_color = Color(0.997314, 0, 0.168662, 0.42)
 

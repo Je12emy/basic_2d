@@ -25,4 +25,4 @@ func Update(_delta: float):
 
 func _on_attack_box_body_entered(body):
 	if body is Mob:
-		body.take_damage(player.ATTACK_DAMAGE)
+		body.take_damage(player.ATTACK_DAMAGE, attack_box)
