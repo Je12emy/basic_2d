@@ -23,3 +23,6 @@ func colides_with_something() -> bool:
 
 func _on_aggro_zone_body_entered(_body: CharacterBody2D):
 	Transitioned.emit(self, "aggro")
+
+func _on_slime_hurt(damage):
+	Transitioned.emit(self, "hurt")

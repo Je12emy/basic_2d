@@ -178,6 +178,7 @@ animated_sprite = NodePath("../../AnimatedSprite2D")
 script = ExtResource("9_sybv2")
 mob = NodePath("../..")
 
+[connection signal="hurt" from="." to="StateMachine/Roam" method="_on_slime_hurt"]
 [connection signal="hurt" from="." to="StateMachine/Aggro" method="_on_slime_hurt"]
 [connection signal="body_entered" from="AttackBox" to="." method="_on_attack_box_body_entered"]
 [connection signal="body_entered" from="AggroZone" to="StateMachine/Roam" method="_on_aggro_zone_body_entered"]

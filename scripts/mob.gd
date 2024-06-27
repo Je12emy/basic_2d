@@ -22,7 +22,6 @@ func take_damage(attack_power: int, attack_box: Area2D):
 	move_and_slide()
 	hurt.emit(attack_power)
 
-
 func _on_attack_box_body_entered(body: CharacterBody2D):
 	if body is Player:
 		body.take_damage(ATTACK_DAMAGE)
