@@ -10,12 +10,8 @@ func Enter():
 	original_color = animated_sprite.modulate
 	animated_sprite.modulate = Color(255, 0, 0)
 	# BUG: I can only get this working once and when hitting the mob from the right side
-	var timer = Timer.new()
-	timer.autostart = true
-	timer.wait_time = 0.2
-	timer.one_shot = true
-	timer.connect("timeout", on_timer_timeout)
-	add_child(timer)
+	var hurt_timer = HurtTimer.new(animated_sprite, on_timer_timeout)
+	add_child(hurt_timer)
 
 func Update(_delta: float):
 	if mob.HEALTH <= 0:

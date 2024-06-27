@@ -9,12 +9,8 @@ var original_color : Color
 func Enter():
 	original_color = animated_sprite.modulate
 	animated_sprite.modulate = Color(255, 0, 0)
-	var timer = Timer.new()
-	timer.autostart = true
-	timer.one_shot = true
-	timer.wait_time = 0.2
-	timer.connect("timeout", on_timer_timeout)
-	add_child(timer)
+	var hurt_timer = HurtTimer.new(animated_sprite, on_timer_timeout)
+	add_child(hurt_timer)
 	
 func Update(_delta: float):
 	if player.HEALTH <= 0:
