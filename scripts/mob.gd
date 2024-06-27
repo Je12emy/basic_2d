@@ -8,11 +8,9 @@ class_name Mob
 
 signal hurt(damage: int)
 
-
 func _physics_process(_delta: float):
 	velocity.y += GRAVITY
 	move_and_slide()
-
 
 func take_damage(attack_power: int, attack_box: Area2D):
 	if attack_box.global_position.x < global_position.x:

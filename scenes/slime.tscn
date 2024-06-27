@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c44koaaloc2ut"]
+[gd_scene load_steps=25 format=3 uid="uid://c44koaaloc2ut"]
 
 [ext_resource type="Script" path="res://scripts/mob.gd" id="1_sv6im"]
 [ext_resource type="Texture2D" uid="uid://crxyu8fha7p5q" path="res://sprites/slime_green.png" id="2_6kcd1"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://states/mob/MobRoam.gd" id="6_iflvr"]
 [ext_resource type="Script" path="res://states/mob/MobAggro.gd" id="7_qb7le"]
 [ext_resource type="Script" path="res://states/mob/MobHurt.gd" id="8_jbin0"]
+[ext_resource type="Script" path="res://states/mob/MobDeath.gd" id="9_sybv2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ke8xo"]
 radius = 9.0
@@ -160,8 +161,13 @@ mob = NodePath("../..")
 script = ExtResource("7_qb7le")
 mob = NodePath("../..")
 
-[node name="Hurt" type="Node" parent="StateMachine" node_paths=PackedStringArray("mob")]
+[node name="Hurt" type="Node" parent="StateMachine" node_paths=PackedStringArray("mob", "animated_sprite")]
 script = ExtResource("8_jbin0")
+mob = NodePath("../..")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("mob")]
+script = ExtResource("9_sybv2")
 mob = NodePath("../..")
 
 [connection signal="hurt" from="." to="StateMachine/Aggro" method="_on_slime_hurt"]
