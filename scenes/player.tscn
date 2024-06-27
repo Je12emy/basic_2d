@@ -286,6 +286,7 @@ shape = SubResource("RectangleShape2D_d7upg")
 debug_color = Color(0.997314, 0, 0.168662, 0.42)
 
 [node name="Healthbar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
 offset_left = -28.0
 offset_top = -32.0
 offset_right = 28.0

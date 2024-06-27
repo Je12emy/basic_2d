@@ -9,10 +9,15 @@ class_name Player
 
 signal player_hurt
 
+func _ready():
+	%Healthbar.max_value = HEALTH
+	%Healthbar.value = HEALTH
+
 func _physics_process(_delta : float):
 	velocity.y += GRAVITY
 	move_and_slide()
 
 func take_damage(attack_damage: int) -> void:
 	HEALTH -= attack_damage
+	$Healthbar.value = HEALTH
 	player_hurt.emit()
