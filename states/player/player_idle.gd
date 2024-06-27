@@ -17,3 +17,7 @@ func Update(_delta: float):
 	if Input.is_action_just_pressed("attack"):
 		Transitioned.emit(self, "attack")
 		return
+
+
+func _on_player_player_hurt():
+	Transitioned.emit(self, "damaged")

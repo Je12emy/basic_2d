@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c44koaaloc2ut"]
+[gd_scene load_steps=26 format=3 uid="uid://c44koaaloc2ut"]
 
 [ext_resource type="Script" path="res://scripts/mob.gd" id="1_sv6im"]
 [ext_resource type="Texture2D" uid="uid://crxyu8fha7p5q" path="res://sprites/slime_green.png" id="2_6kcd1"]
@@ -12,6 +12,8 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ke8xo"]
 radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1gio7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0g22"]
 size = Vector2(134, 14)
@@ -128,6 +130,12 @@ position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_ke8xo")
 debug_color = Color(1.92523e-07, 0.612891, 0.618609, 0.42)
 
+[node name="AttackBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_1gio7")
+
 [node name="AggroZone" type="Area2D" parent="."]
 collision_layer = 4
 
@@ -171,5 +179,6 @@ script = ExtResource("9_sybv2")
 mob = NodePath("../..")
 
 [connection signal="hurt" from="." to="StateMachine/Aggro" method="_on_slime_hurt"]
+[connection signal="body_entered" from="AttackBox" to="." method="_on_attack_box_body_entered"]
 [connection signal="body_entered" from="AggroZone" to="StateMachine/Roam" method="_on_aggro_zone_body_entered"]
 [connection signal="body_exited" from="AggroZone" to="StateMachine/Aggro" method="_on_aggro_zone_body_exited"]

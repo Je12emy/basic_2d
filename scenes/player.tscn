@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bumk4mqrwwfnm"]
+[gd_scene load_steps=49 format=3 uid="uid://bumk4mqrwwfnm"]
 
 [ext_resource type="Texture2D" uid="uid://b75f01dcauk1l" path="res://sprites/knight/attack.png" id="1_8vc65"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_sukmu"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://states/player/player_attack.gd" id="9_wlft1"]
 [ext_resource type="Script" path="res://states/player/player_jump.gd" id="11_vschr"]
 [ext_resource type="Script" path="res://states/player/player_falling.gd" id="12_tyaf8"]
+[ext_resource type="Script" path="res://states/player/player_hurt.gd" id="13_buent"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fvuhs"]
 atlas = ExtResource("1_8vc65")
@@ -256,6 +257,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7upg"]
 size = Vector2(45.5, 26)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_14222"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lq0f"]
+bg_color = Color(4.57242e-06, 0.717593, 0.375461, 1)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 7
 collision_mask = 7
@@ -278,6 +284,19 @@ monitoring = false
 position = Vector2(0.25, 3)
 shape = SubResource("RectangleShape2D_d7upg")
 debug_color = Color(0.997314, 0, 0.168662, 0.42)
+
+[node name="Healthbar" type="ProgressBar" parent="."]
+offset_left = -28.0
+offset_top = -32.0
+offset_right = 28.0
+offset_bottom = -22.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_14222")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7lq0f")
+value = 100.0
+fill_mode = 1
+show_percentage = false
 
 [node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("6_icu60")
@@ -311,4 +330,13 @@ jump_time_to_descent = 0.4
 script = ExtResource("12_tyaf8")
 player = NodePath("../..")
 
+[node name="Hurt" type="Node" parent="State Machine" node_paths=PackedStringArray("player", "animated_sprite")]
+script = ExtResource("13_buent")
+player = NodePath("../..")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+
+[connection signal="player_hurt" from="." to="State Machine/Idle" method="_on_player_player_hurt"]
+[connection signal="player_hurt" from="." to="State Machine/Walk" method="_on_player_player_hurt"]
+[connection signal="player_hurt" from="." to="State Machine/Attack" method="_on_player_player_hurt"]
+[connection signal="player_hurt" from="." to="State Machine/Jump" method="_on_player_player_hurt"]
 [connection signal="body_entered" from="AttackBox" to="State Machine/Attack" method="_on_attack_box_body_entered"]

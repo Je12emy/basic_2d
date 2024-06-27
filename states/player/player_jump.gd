@@ -47,3 +47,7 @@ func get_input_velocity() -> float:
 		horizontal += 1.0
 		animated_sprite.flip_h = false
 	return horizontal
+
+
+func _on_player_player_hurt():
+	Transitioned.emit(self, "hurt")
