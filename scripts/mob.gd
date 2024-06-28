@@ -6,6 +6,8 @@ class_name Mob
 @export var SPEED: int = 50
 @export var HEALTH: int = 75
 @export var ATTACK_DAMAGE : int = 15
+@export var ROAM_TYPE : MobRoamType.Pattern = MobRoamType.Pattern.Patrol
+@export var ROAM_DURATION : int = 3
 
 signal hurt(damage: int)
 

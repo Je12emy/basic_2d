@@ -131,12 +131,14 @@ shape = SubResource("CircleShape2D_ke8xo")
 debug_color = Color(1.92523e-07, 0.612891, 0.618609, 0.42)
 
 [node name="AttackBox" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
 position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_1gio7")
 
 [node name="AggroZone" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroZone"]
@@ -146,7 +148,7 @@ debug_color = Color(0.61984, 0.354367, 1, 0.42)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_b13te")
-animation = &"walk"
+animation = &"idle"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_7jqi3")
