@@ -2,8 +2,10 @@ extends State
 
 class_name PlayerDeath
 
+@export var player : Player
+
+signal player_dead
+
 func Enter():
-	pass
-	
-func Update(_delta: float):
-	pass
+	player_dead.emit()
+	player.queue_free()

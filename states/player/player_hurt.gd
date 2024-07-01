@@ -14,7 +14,7 @@ func Enter():
 	
 func Update(_delta: float):
 	if player.HEALTH <= 0:
-		Transitioned.emit(self, "death")
+		Transitioned.emit(self, "dead")
 		return
 	Transitioned.emit(self, "idle")
 

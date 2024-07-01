@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://bumk4mqrwwfnm"]
+[gd_scene load_steps=50 format=3 uid="uid://bumk4mqrwwfnm"]
 
 [ext_resource type="Texture2D" uid="uid://b75f01dcauk1l" path="res://sprites/knight/attack.png" id="1_8vc65"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_sukmu"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://states/player/player_jump.gd" id="11_vschr"]
 [ext_resource type="Script" path="res://states/player/player_falling.gd" id="12_tyaf8"]
 [ext_resource type="Script" path="res://states/player/player_hurt.gd" id="13_buent"]
+[ext_resource type="Script" path="res://states/player/player_death.gd" id="14_6cia7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fvuhs"]
 atlas = ExtResource("1_8vc65")
@@ -335,6 +336,9 @@ player = NodePath("../..")
 script = ExtResource("13_buent")
 player = NodePath("../..")
 animated_sprite = NodePath("../../AnimatedSprite2D")
+
+[node name="Dead" type="Node" parent="State Machine"]
+script = ExtResource("14_6cia7")
 
 [connection signal="player_hurt" from="." to="State Machine/Idle" method="_on_player_player_hurt"]
 [connection signal="player_hurt" from="." to="State Machine/Walk" method="_on_player_player_hurt"]
