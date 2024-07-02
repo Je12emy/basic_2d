@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://28thpjmbvhrj"]
+[gd_scene load_steps=9 format=3 uid="uid://28thpjmbvhrj"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_26480"]
 [ext_resource type="Texture2D" uid="uid://bhimbrdj8owdi" path="res://sprites/world_tileset.png" id="1_xouvr"]
 [ext_resource type="PackedScene" uid="uid://bumk4mqrwwfnm" path="res://scenes/player.tscn" id="2_p4xke"]
 [ext_resource type="PackedScene" uid="uid://c44koaaloc2ut" path="res://scenes/slime.tscn" id="3_8vgyo"]
 [ext_resource type="PackedScene" uid="uid://dp4xu86b8yhqn" path="res://scenes/key.tscn" id="4_27ff2"]
+[ext_resource type="PackedScene" uid="uid://xrxh6l5s6yvt" path="res://scenes/game_over.tscn" id="6_1ydg7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jwjxl"]
 texture = ExtResource("1_xouvr")
@@ -445,6 +446,10 @@ position = Vector2(25, 34)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
 
+[node name="GameOver" parent="Player" instance=ExtResource("6_1ydg7")]
+unique_name_in_owner = true
+visible = false
+
 [node name="Slime" parent="." instance=ExtResource("3_8vgyo")]
 position = Vector2(143, 84)
 
@@ -452,9 +457,8 @@ position = Vector2(143, 84)
 position = Vector2(523, 81)
 ROAM_TYPE = 0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
 [node name="Key" parent="." instance=ExtResource("4_27ff2")]
 position = Vector2(579, 86)
 
+[connection signal="restart" from="Player/GameOver" to="." method="_on_game_over_restart"]
 [connection signal="level_over" from="Key" to="." method="_on_key_level_over"]

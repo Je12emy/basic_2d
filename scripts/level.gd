@@ -1,6 +1,7 @@
 extends Node
 
-@export var key : Node2D
-
 func _on_key_level_over():
-	get_tree().paused = true
+	%GameOver.visible = true
+
+func _on_game_over_restart():
+	get_tree().reload_current_scene()

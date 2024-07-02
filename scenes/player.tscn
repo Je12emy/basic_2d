@@ -337,8 +337,9 @@ script = ExtResource("13_buent")
 player = NodePath("../..")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 
-[node name="Dead" type="Node" parent="State Machine"]
+[node name="Dead" type="Node" parent="State Machine" node_paths=PackedStringArray("player")]
 script = ExtResource("14_6cia7")
+player = NodePath("../..")
 
 [connection signal="player_hurt" from="." to="State Machine/Idle" method="_on_player_player_hurt"]
 [connection signal="player_hurt" from="." to="State Machine/Walk" method="_on_player_player_hurt"]
