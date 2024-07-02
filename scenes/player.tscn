@@ -346,3 +346,4 @@ player = NodePath("../..")
 [connection signal="player_hurt" from="." to="State Machine/Attack" method="_on_player_player_hurt"]
 [connection signal="player_hurt" from="." to="State Machine/Jump" method="_on_player_player_hurt"]
 [connection signal="body_entered" from="AttackBox" to="State Machine/Attack" method="_on_attack_box_body_entered"]
+[connection signal="player_dead" from="State Machine/Dead" to="." method="_on_dead_player_dead"]

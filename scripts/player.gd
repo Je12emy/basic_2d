@@ -21,3 +21,8 @@ func take_damage(attack_damage: int) -> void:
 	HEALTH -= attack_damage
 	$Healthbar.value = HEALTH
 	player_hurt.emit()
+
+signal player_dead
+
+func _on_dead_player_dead():
+	player_dead.emit()

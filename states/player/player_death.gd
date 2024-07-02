@@ -8,4 +8,3 @@ signal player_dead
 
 func Enter():
 	player_dead.emit()
-	player.queue_free()

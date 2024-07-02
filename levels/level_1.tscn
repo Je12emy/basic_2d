@@ -460,5 +460,6 @@ ROAM_TYPE = 0
 [node name="Key" parent="." instance=ExtResource("4_27ff2")]
 position = Vector2(579, 86)
 
+[connection signal="player_dead" from="Player" to="." method="_on_player_player_dead"]
 [connection signal="restart" from="Player/GameOver" to="." method="_on_game_over_restart"]
 [connection signal="level_over" from="Key" to="." method="_on_key_level_over"]
